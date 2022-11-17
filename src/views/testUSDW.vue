@@ -221,7 +221,7 @@ export default {
   },
   methods:{
     approve(){
-      this.$store.dispatch("usdt/approve",{_spender:this.input1,_value:this.input2}).then(res=>{
+      this.$store.dispatch("usdt/approve",{_spender:this.input1,_value:this.input2*10**this.decimal}).then(res=>{
         console.log(res)
         alert("success")
       }).catch(err=>{
@@ -239,7 +239,7 @@ export default {
       })
     },
     transfer(){
-      this.$store.dispatch("usdt/transfer",{_to:this.input3,_value:this.input4*10**18}).then(res=>{
+      this.$store.dispatch("usdt/transfer",{_to:this.input3,_value:this.input4*10**this.decimal}).then(res=>{
         console.log(res)
         alert("success")
       }).catch(err=>{
@@ -284,7 +284,7 @@ export default {
       })
     },
     redeem(){
-      this.$store.dispatch("usdt/redeem",this.input7).then(res=>{
+      this.$store.dispatch("usdt/redeem",this.input7* 10**this.decimal).then(res=>{
         console.log(res)
         alert("success")
       }).catch(err=>{
@@ -293,7 +293,7 @@ export default {
       })
     },
     issue(){
-      this.$store.dispatch("usdt/issue",this.input7).then(res=>{
+      this.$store.dispatch("usdt/issue",this.input7 * 10**this.decimal).then(res=>{
         console.log(res)
         alert("success")
       }).catch(err=>{
@@ -303,19 +303,19 @@ export default {
     },
     _totalSupply(){
       this.$store.dispatch("usdt/_totalSupply").then(res=>{
-        this.totalSupply= res
+        this.totalSupply= res/   10**this.decimal
       })
     },
     balanceOf(){
       this.$store.dispatch("usdt/balanceOf",this.search1).then(res=>{
-        this.balance= res
+        this.balance= res/   10**this.decimal
       })
     },
     allowance(){
       this.$store.dispatch("usdt/allowance",{
         _owner:this.search2
       }).then(res=>{
-        this.allowanceNumber= res
+        this.allowanceNumber= res/ 10**this.decimal
       })
     },
     decimals(){
