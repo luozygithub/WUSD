@@ -207,17 +207,20 @@ export default {
   },
   computed: {
     account(){
-      this.decimals()
-      this.$store.state.web3.eth.getPastLogs({
-        address:"0x694e3b56e0224859a7281dBFF8D77EeFD418BdAA"
-      })
+
+
       return this.$store.state.account
     }
   },
   created() {
-    if(this.account){
-      this.decimals()
-    }
+    console.log("created")
+    this.decimals()
+    this.$store.state.web3.eth.getPastLogs({
+      address:"0x694e3b56e0224859a7281dBFF8D77EeFD418BdAA"
+    }).then(res=>{
+      console.log(res)
+    })
+
   },
   methods:{
     approve(){
@@ -319,10 +322,20 @@ export default {
       })
     },
     decimals(){
-      this.$store.dispatch("usdt/decimals",{
-      }).then(res=>{
-        this.decimal= res
-      })
+      console.log(this.account)
+      if(this.account.length>5){
+        this.$store.dispatch("usdt/decimals",{
+        }).then(res=>{
+          this.decimal= res
+        })
+
+      }else{
+        setTimeout(()=>{
+          console.log(111111111111111)
+          this.decimals()
+        },500)
+      }
+
     },
   }
 }
