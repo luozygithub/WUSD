@@ -202,7 +202,8 @@ export default {
       totalSupply:undefined,
       decimal: undefined,
       balance:undefined,
-      allowanceNumber:undefined
+      allowanceNumber:undefined,
+      decimalNumber:undefined
     }
   },
   computed: {
@@ -224,7 +225,7 @@ export default {
   },
   methods:{
     approve(){
-      this.$store.dispatch("usdt/approve",{_spender:this.input1,_value:this.input2*10**this.decimal}).then(res=>{
+      this.$store.dispatch("usdt/approve",{_spender:this.input1,_value:this.input2*this.decimalNumber}).then(res=>{
         console.log(res)
         alert("success")
       }).catch(err=>{
@@ -242,7 +243,7 @@ export default {
       })
     },
     transfer(){
-      this.$store.dispatch("usdt/transfer",{_to:this.input3,_value:this.input4*10**this.decimal}).then(res=>{
+      this.$store.dispatch("usdt/transfer",{_to:this.input3,_value:this.input4*this.decimalNumber}).then(res=>{
         console.log(res)
         alert("success")
       }).catch(err=>{
@@ -287,7 +288,7 @@ export default {
       })
     },
     redeem(){
-      this.$store.dispatch("usdt/redeem",this.input7* 10**this.decimal).then(res=>{
+      this.$store.dispatch("usdt/redeem",this.input7* this.decimalNumber).then(res=>{
         console.log(res)
         alert("success")
       }).catch(err=>{
@@ -296,7 +297,7 @@ export default {
       })
     },
     issue(){
-      this.$store.dispatch("usdt/issue",this.input7 * 10**this.decimal).then(res=>{
+      this.$store.dispatch("usdt/issue",this.input7 * this.decimalNumber).then(res=>{
         console.log(res)
         alert("success")
       }).catch(err=>{
@@ -306,19 +307,19 @@ export default {
     },
     _totalSupply(){
       this.$store.dispatch("usdt/_totalSupply").then(res=>{
-        this.totalSupply= res/   10**this.decimal
+        this.totalSupply= res/   this.decimalNumber
       })
     },
     balanceOf(){
       this.$store.dispatch("usdt/balanceOf",this.search1).then(res=>{
-        this.balance= res/   10**this.decimal
+        this.balance= res/   this.decimalNumber
       })
     },
     allowance(){
       this.$store.dispatch("usdt/allowance",{
         _owner:this.search2
       }).then(res=>{
-        this.allowanceNumber= res/ 10**this.decimal
+        this.allowanceNumber= res/ this.decimalNumber
       })
     },
     decimals(){
@@ -327,6 +328,7 @@ export default {
         this.$store.dispatch("usdt/decimals",{
         }).then(res=>{
           this.decimal= res
+          this.decimalNumber = 10**parseInt(res)
         })
 
       }else{
