@@ -182,6 +182,7 @@
 
 <script>
 import ConnectWallet from "../components/ConnectWallet"
+/* eslint-disable */
 export default {
   name: "testUSDW",
   components:{ConnectWallet},
@@ -225,7 +226,7 @@ export default {
   },
   methods:{
     approve(){
-      this.$store.dispatch("usdt/approve",{_spender:this.input1,_value:this.input2*this.decimalNumber}).then(res=>{
+      this.$store.dispatch("usdt/approve",{_spender:this.input1,_value:BigInt(this.input2*this.decimalNumber)}).then(res=>{
         console.log(res)
         alert("success")
       }).catch(err=>{
@@ -243,7 +244,7 @@ export default {
       })
     },
     transfer(){
-      this.$store.dispatch("usdt/transfer",{_to:this.input3,_value:this.input4*this.decimalNumber}).then(res=>{
+      this.$store.dispatch("usdt/transfer",{_to:this.input3,_value:BigInt(this.input4*this.decimalNumber)}).then(res=>{
         console.log(res)
         alert("success")
       }).catch(err=>{
@@ -288,7 +289,7 @@ export default {
       })
     },
     redeem(){
-      this.$store.dispatch("usdt/redeem",this.input7* this.decimalNumber).then(res=>{
+      this.$store.dispatch("usdt/redeem",BigInt(this.input7* this.decimalNumber)).then(res=>{
         console.log(res)
         alert("success")
       }).catch(err=>{
@@ -297,7 +298,8 @@ export default {
       })
     },
     issue(){
-      this.$store.dispatch("usdt/issue",this.input7 * this.decimalNumber).then(res=>{
+
+      this.$store.dispatch("usdt/issue",BigInt(this.input7 * this.decimalNumber)).then(res=>{
         console.log(res)
         alert("success")
       }).catch(err=>{
