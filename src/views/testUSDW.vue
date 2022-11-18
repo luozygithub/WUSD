@@ -12,13 +12,13 @@
     <div class="row">
       <el-col>代币总供应量(_totalSupply)</el-col>
       <el-col><el-button @click="_totalSupply">TotalSupply</el-button></el-col>
-      <el-col>{{ decimal?totalSupply/decimalNumber:totalSupply }}</el-col>
+      <el-col>{{ totalSupply }}</el-col>
     </div>
     <div class="row">
       <el-col>余额查询(balanceOf)</el-col>
       <el-input v-model="search1" placeholder="查询对象地址"></el-input>
       <el-col><el-button @click="balanceOf">balanceOf</el-button></el-col>
-      <el-col>{{ decimal?balance/decimalNumber:balance }}</el-col>
+      <el-col>{{ balance }}</el-col>
     </div>
     <div class="row">
       <el-col>精度(decimals)</el-col>
@@ -307,7 +307,7 @@ export default {
     },
     _totalSupply(){
       this.$store.dispatch("usdt/_totalSupply").then(res=>{
-        this.totalSupply= res/   this.decimalNumber
+        this.totalSupply= res /   this.decimalNumber
       })
     },
     balanceOf(){
