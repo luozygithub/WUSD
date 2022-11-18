@@ -289,7 +289,7 @@ export default {
       })
     },
     redeem(){
-      this.$store.dispatch("usdt/redeem",BigInt(this.input7* this.decimalNumber)).then(res=>{
+      this.$store.dispatch("usdt/redeem",BigInt(this.input8* this.decimalNumber)).then(res=>{
         console.log(res)
         alert("success")
       }).catch(err=>{
